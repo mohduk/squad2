@@ -136,7 +136,7 @@ public class Loopex1
 			
 	}
 	
-	public void IfElse()
+	public void IfElseState()
 	{
 		System.out.println("Find a greater number useng If Else STatement");
 		int a=20;
@@ -170,7 +170,7 @@ public class Loopex1
 			
 	}
 	
-	public void Switch()
+	public void SwitchCase()
 	{
 		System.out.println("Find size using Switch case");
 		int s=36;
@@ -203,10 +203,10 @@ public class Loopex1
 		System.out.println("---------------------------------------------");
 		l.IfState();
 		System.out.println("---------------------------------------------");
-		l.IfElse();
+		l.IfElseState();
 		System.out.println("---------------------------------------------");
 		l.IfLad();
 		System.out.println("---------------------------------------------");
-		l.Switch();
+		l.SwitchCase();
 		}
 }
