@@ -195,7 +195,7 @@ public class Loopex1
 	
 		l.ForEx();
 		System.out.println("---------------------------------------------");
-		l.WhileEx();
+		l.While();
 		System.out.println("---------------------------------------------");
 		l.DoWhileEx();
 		System.out.println("---------------------------------------------");
