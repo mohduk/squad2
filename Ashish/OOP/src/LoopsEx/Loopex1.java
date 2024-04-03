@@ -55,10 +55,13 @@ public class Loopex1
 	public static void main(String[] args) 
 	{
 		Loopex1 l= new Loopex1();
-		
+	
 		l.ForEx();
+		System.out.println("---------------------------------------------");
 		l.WhileEx();
+		System.out.println("---------------------------------------------");
 		l.DoWhileEx();
+		System.out.println("---------------------------------------------");
 		l.NestLoop();
 	}
 }
