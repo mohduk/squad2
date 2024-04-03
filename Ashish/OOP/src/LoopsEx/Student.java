@@ -16,8 +16,13 @@ public class Student
 			System.out.print("\tPercentage: "+k);
 			System.out.println();
 			System.out.println("--------------------------------------------------");
+			
+			int h=i;
+			if(h>i)
+			{
+				h=i;
+			}
 		}
-
+	
 	}
-
 }
