@@ -63,5 +63,16 @@ public class Loopex1
 		l.DoWhileEx();
 		System.out.println("---------------------------------------------");
 		l.NestLoop();
+<<<<<<< Updated upstream
+=======
+		System.out.println("---------------------------------------------");
+		l.IfState();
+		System.out.println("---------------------------------------------");
+		l.IfElse();
+		System.out.println("---------------------------------------------");
+		l.IfElseLad();
+		System.out.println("---------------------------------------------");
+		l.Switch();
+>>>>>>> Stashed changes
 	}
 }
