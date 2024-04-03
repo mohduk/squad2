@@ -4,7 +4,7 @@ public class Loopex1
 {
 	public void  ForEx()
 	{
-	System.out.println("Table of 28");
+	System.out.println("Table of 28 using For Loop");
 		
 		int j=28;
 		
@@ -17,7 +17,7 @@ public class Loopex1
 	
 	public void WhileEx()
 	{
-		System.out.println("Table of 21");
+		System.out.println("Table of 21 using While Loop");
 		int j=21;
 		int i=1;
 		while(i<11)
@@ -29,7 +29,7 @@ public class Loopex1
 	
 	public void DoWhileEx()
 	{
-		System.out.println("Table of 20");
+		System.out.println("Table of 20 using Do While Loop");
 		int j=20;
 		int i=1;
 		do
@@ -41,7 +41,7 @@ public class Loopex1
 
 	public void NestLoop()
 	{
-		System.out.println("Pattern:");
+		System.out.println("Pattern using Nested Loops:");
 		for(int i=0; i<=5;i++)
 		{
 			for(int j=i;j>=1;j--)
@@ -52,6 +52,70 @@ public class Loopex1
 		}
 	}
 	
+	public void IfState()
+	{
+		System.out.println("Print a Number if Positve using If Statement");
+		int a=10;
+		if(a>0)
+		{
+			System.out.println(a+" is greater than 0.");
+		}
+			
+	}
+	
+	public void IfElse()
+	{
+		System.out.println("Find a greater number useng If Else STatement");
+		int a=20;
+		int b=30;
+		if(a>b)
+		{
+			System.out.println(a+" is greater than "+b);
+		}
+		else
+		{
+			System.out.println(b+" is greater than "+a);
+		}
+	}
+	
+	public void IfLad()
+	{
+		System.out.println("Find a size using If else Ladder");
+		int s=30;
+		if(s==30)
+		{
+			System.out.println(s+ "is small size");
+		}
+		if(s==36)
+		{
+			System.out.println(s+" is extr large size");
+		}
+		else 
+		{
+			System.out.println("Size not available");
+		}
+			
+	}
+	
+	public void Switch()
+	{
+		System.out.println("Find size using Switch case");
+		int s=36;
+		switch(s)
+		{
+		case 30:
+			System.out.println(s+" is small size");
+			break;
+			
+		case 36:
+			System.out.println(s+" is extr large size");
+			break;
+			
+		default:
+			System.out.println("Size not available");
+			break;
+		}
+	}
 	public static void main(String[] args) 
 	{
 		Loopex1 l= new Loopex1();
@@ -63,16 +127,13 @@ public class Loopex1
 		l.DoWhileEx();
 		System.out.println("---------------------------------------------");
 		l.NestLoop();
-<<<<<<< Updated upstream
-=======
 		System.out.println("---------------------------------------------");
 		l.IfState();
 		System.out.println("---------------------------------------------");
 		l.IfElse();
 		System.out.println("---------------------------------------------");
-		l.IfElseLad();
+		l.IfLad();
 		System.out.println("---------------------------------------------");
 		l.Switch();
->>>>>>> Stashed changes
-	}
+		}
 }
