@@ -6,9 +6,9 @@ public class Program {
 		// TODO Auto-generated method stub
 
 		
-		// Fibonacci Serise		
-		//FibonacciSeries fibonacciSeries = new FibonacciSeries();
-		//fibonacciSeries.getFibonacciNumber();
+		 //Fibonacci Serise		
+		FibonacciSeries fibonacciSeries = new FibonacciSeries();
+		fibonacciSeries.getFibonacciNumber();
 		
 		// Prime
 	}
