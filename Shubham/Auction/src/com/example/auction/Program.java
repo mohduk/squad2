@@ -12,7 +12,10 @@ public class Program {
 		
 		//Prime
 		
-		Prime.PrintPrimeNumberSerise();
+		//	Prime.PrintPrimeNumberSerise();
+		
+		Ascci A=new Ascci();
+		A.Print();
 		
 		
 	}
