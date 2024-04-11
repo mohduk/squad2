@@ -6,3 +6,7 @@ byte b=10;
 byte c=(byte)(a+b);  
 System.out.println(c);  
 }}  
+
+Output:
+20
+
