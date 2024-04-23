@@ -3,7 +3,7 @@ id int identity (1,1), name varchar(10));
 
 
 CREATE TABLE Department(
-id int, name varchar(10));
+id int identity(1,1), name varchar(10));
 
 
 insert into student values(  'Pratik')
@@ -34,8 +34,13 @@ Alter table student
 drop column DepartmentID;
 
 insert into Department values ( 1, 'IT')
+insert into Department values ( 2, 'Civil')
 
+Alter table student
+add constraint fk_student_department_id foreign key id references department;
 
+insert into Department values ('IT')
+insert into Department values ('Civil')
 
 
 
