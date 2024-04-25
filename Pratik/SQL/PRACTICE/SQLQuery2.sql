@@ -42,3 +42,4 @@ join department d
 on s.departmentid = d.id 
 
 
+insert into student values ('Shrutika')

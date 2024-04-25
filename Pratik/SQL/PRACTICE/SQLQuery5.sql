@@ -18,8 +18,8 @@ having age > 20
   
  select * from student
 
- insert into department values ('JAVA')
-  insert into department values ('NET')
+ insert into department values (1,'JAVA')
+  insert into department values (2,'NET')
 
 update student set departmentid = 20 where id = 0
  
