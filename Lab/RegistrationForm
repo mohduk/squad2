@@ -1,16 +1,20 @@
 Example of Registration Form in JSP
 
-In this example, we are using the Oracle10g database to connect with the database. Let's first create the table in the Oracle database:
-CREATE TABLE  "USER432"   
-   (    "NAME" VARCHAR2(4000),   
+In this example, we are using the MySQL database to connect with the database. Let's first create the table in the MySQL database:
+
+CREATE TABLE  "USER"   
+   (  
+   "NAME" VARCHAR2(4000),   
     "EMAIL" VARCHAR2(4000),   
     "PASS" VARCHAR2(4000)  
    )  
-/  
-We have created the table named user432 here.
+
+
+We have created the table named USER here.
 
 
 index.jsp
+
 We are having only three fields here, to make the concept clear and simplify the flow of the application. You can have other fields also like country, hobby etc. according to your requirement.
 
 
@@ -20,7 +24,9 @@ We are having only three fields here, to make the concept clear and simplify the
 <input type="password" name="upass"  value="Password..." onclick="this.value=''"/><br/>  
 <input type="submit" value="register"/>  
 </form>  
+
 process.jsp
+
 This jsp file contains all the incoming values to an object of bean class which is passed as an argument in the register method of the RegisterDao class.
 
 <%@page import="bean.RegisterDao"%>  
@@ -34,11 +40,16 @@ if(status>0)
 out.print("You are successfully registered");  
   
 %>  
+
+
 User.java
+
 It is the bean class that have 3 properties uname, uemail and upass with its setter and getter methods.
+
 package bean;  
   
 public class User {  
+
 private String uname,upass,uemail;  
   
 public String getUname() {  
@@ -66,27 +77,33 @@ public void setUemail(String uemail) {
 }  
   
 }  
-Provider.java
+
+IProvider.java
+
 This interface contains four constants that can vary from database to database.
 
 
 package bean;  
   
-public interface Provider {  
+public interface IProvider {  
+
 String DRIVER="oracle.jdbc.driver.OracleDriver";  
 String CONNECTION_URL="jdbc:oracle:thin:@localhost:1521:xe";  
 String USERNAME="system";  
 String PASSWORD="oracle";  
   
 }  
+
 ConnectionProvider.java
+
 This class is responsible to return the object of Connection. Here, driver class is loaded only once and connection object gets memory only once.
 
 package bean;  
 import java.sql.*;  
 import static bean.Provider.*;  
   
-public class ConnectionProvider {  
+public class ConnectionProvider
+{  
 private static Connection con=null;  
 static{  
 try{  
@@ -100,7 +117,10 @@ public static Connection getCon(){
 }  
   
 }  
+
+
 RegisterDao.java
+
 This class inserts the values of the bean component into the database.
 
 
@@ -123,6 +143,5 @@ status=ps.executeUpdate();
 }catch(Exception e){}  
       
 return status;  
-}  
-  
+}    
 }  
