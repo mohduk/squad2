@@ -1,0 +1,128 @@
+Example of Registration Form in JSP
+
+In this example, we are using the Oracle10g database to connect with the database. Let's first create the table in the Oracle database:
+CREATE TABLE  "USER432"   
+   (    "NAME" VARCHAR2(4000),   
+    "EMAIL" VARCHAR2(4000),   
+    "PASS" VARCHAR2(4000)  
+   )  
+/  
+We have created the table named user432 here.
+
+
+index.jsp
+We are having only three fields here, to make the concept clear and simplify the flow of the application. You can have other fields also like country, hobby etc. according to your requirement.
+
+
+<form action="process.jsp">  
+<input type="text" name="uname" value="Name..." onclick="this.value=''"/><br/>  
+<input type="text" name="uemail"  value="Email ID..." onclick="this.value=''"/><br/>  
+<input type="password" name="upass"  value="Password..." onclick="this.value=''"/><br/>  
+<input type="submit" value="register"/>  
+</form>  
+process.jsp
+This jsp file contains all the incoming values to an object of bean class which is passed as an argument in the register method of the RegisterDao class.
+
+<%@page import="bean.RegisterDao"%>  
+<jsp:useBean id="obj" class="bean.User"/>  
+  
+<jsp:setProperty property="*" name="obj"/>  
+  
+<%  
+int status=RegisterDao.register(obj);  
+if(status>0)  
+out.print("You are successfully registered");  
+  
+%>  
+User.java
+It is the bean class that have 3 properties uname, uemail and upass with its setter and getter methods.
+package bean;  
+  
+public class User {  
+private String uname,upass,uemail;  
+  
+public String getUname() {  
+    return uname;  
+}  
+  
+public void setUname(String uname) {  
+    this.uname = uname;  
+}  
+  
+public String getUpass() {  
+    return upass;  
+}  
+  
+public void setUpass(String upass) {  
+    this.upass = upass;  
+}  
+  
+public String getUemail() {  
+    return uemail;  
+}  
+  
+public void setUemail(String uemail) {  
+    this.uemail = uemail;  
+}  
+  
+}  
+Provider.java
+This interface contains four constants that can vary from database to database.
+
+
+package bean;  
+  
+public interface Provider {  
+String DRIVER="oracle.jdbc.driver.OracleDriver";  
+String CONNECTION_URL="jdbc:oracle:thin:@localhost:1521:xe";  
+String USERNAME="system";  
+String PASSWORD="oracle";  
+  
+}  
+ConnectionProvider.java
+This class is responsible to return the object of Connection. Here, driver class is loaded only once and connection object gets memory only once.
+
+package bean;  
+import java.sql.*;  
+import static bean.Provider.*;  
+  
+public class ConnectionProvider {  
+private static Connection con=null;  
+static{  
+try{  
+Class.forName(DRIVER);  
+con=DriverManager.getConnection(CONNECTION_URL,USERNAME,PASSWORD);  
+}catch(Exception e){}  
+}  
+  
+public static Connection getCon(){  
+    return con;  
+}  
+  
+}  
+RegisterDao.java
+This class inserts the values of the bean component into the database.
+
+
+package bean;  
+  
+import java.sql.*;  
+  
+public class RegisterDao {  
+  
+public static int register(User u){  
+int status=0;  
+try{  
+Connection con=ConnectionProvider.getCon();  
+PreparedStatement ps=con.prepareStatement("insert into user432 values(?,?,?)");  
+ps.setString(1,u.getUname());  
+ps.setString(2,u.getUemail());  
+ps.setString(3,u.getUpass());  
+              
+status=ps.executeUpdate();  
+}catch(Exception e){}  
+      
+return status;  
+}  
+  
+}  
