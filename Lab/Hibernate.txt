@@ -1,0 +1,187 @@
+Hibernate Example using JPA and MySQL Last Updated : 09 Jan, 2024
+
+Hibernate is a framework that provides some abstraction layer, meaning that the programmer does not have to worry about the implementations, Hibernate does the implementations for you internally like writing queries to perform CRUD operations, establishing a connection with the database, etc. It is a Java framework that is used to develop persistence logic. More precisely Hibernate is an open-source, non-invasive, lightweight Java ORM (Object-relational mapping) framework to develop objects that are independent of the database software and make independent persistence logic in all JAVA, and JEE.
+
+JPA stands for Java Persistence API. It is known as Java specification which provides some functionality and standard to ORM tools. It is used to control, review, and persist data between Java objects and databases. It is regarded as the standard technique for Object Relational Mapping. Sometimes Geeks got confused between JPA and Hibernate. So here are some basic differences between JPA and Hibernate.
+
+JPA
+
+Hibernate
+
+JPA is not an implementation. It is only a Java specification.	Hibernate is an implementation of JPA.
+JPA explains the handling of data in Java applications.	Hibernate is an ORM (Object-Relational Mapping) tool that is used to save Java objects in the database system.
+As an object-oriented query language, JPA uses JPQL (Java Persistence Query Language) to execute database operations.	As an object-oriented query language, it uses Hibernate Query Language (HQL) to execute database operations.
+Implementation: We are going to build a simple Java application by creating a maven project and we are going to save some data inside the MySQL Database with the help of both Hibernate and JPA concepts. 
+
+Step 1: Create a maven project in your favorite Java IDE (In this article we are using IntelliJ IDEA)
+
+New Project Creation
+
+Step 2: When you have successfully created a maven project you have to add some dependencies in your pom.xml file. You have to add the following dependency in your pom.xml file.
+
+Dependency for Hibernate is as follows:
+
+<dependency>
+  <groupId>org.hibernate.orm</groupId>
+  <artifactId>hibernate-core</artifactId>
+  <version>6.2.7.Final</version>
+</dependency>
+ Dependency for MySQL is as follows:
+
+<dependency>
+  <groupId>mysql</groupId>
+  <artifactId>mysql-connector-java</artifactId>
+  <version>5.0.8</version>
+</dependency>
+Example: pom.xml File
+
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+ 
+    <groupId>org.example</groupId>
+    <artifactId>hibernateapp</artifactId>
+    <version>1.0-SNAPSHOT</version>
+ 
+    <dependencies>
+        <dependency>
+            <groupId>org.hibernate.orm</groupId>
+            <artifactId>hibernate-core</artifactId>
+            <version>6.2.7.Final</version>
+        </dependency>
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>5.0.8</version>
+        </dependency>
+    </dependencies>
+ 
+    <properties>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
+    </properties>
+ 
+</project>
+Step 3: Create a simple POJO class and name the class as Song. 
+
+// Java Program to Illustrate Creation of Simple POJO Class
+ 
+// Importing required classes
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+ 
+@Entity
+@Table(name = "song")
+ 
+// POJO class
+public class Song {
+ 
+    @Id @Column(name = "songId") private int id;
+ 
+    @Column(name = "songName") private String songName;
+ 
+    @Column(name = "singer") private String artist;
+ 
+    public int getId() { return id; }
+ 
+    public void setId(int id) { this.id = id; }
+ 
+    public String getSongName() { return songName; }
+ 
+    public void setSongName(String songName)
+    {
+        this.songName = songName;
+    }
+ 
+    public String getArtist() { return artist; }
+ 
+    public void setArtist(String artist)
+    {
+        this.artist = artist;
+    }
+}
+Step 4: Create a hibernate configuration file (XML file) inside the src > main > resources folder. Here we have named the file hibernate.cfg.xml. In this file, we are going to configure all the properties for the MySQL Database.
+
+Example: hibernate.cfg.xml File 
+
+<?xml version = "1.0" encoding = "utf-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD 3.0//EN" 
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory>
+ 
+        <!-- Set URL -->
+        <property name = "hibernate.connection.url">jdbc:mysql://localhost:3306/hibernate-demo(your schema name)</property>
+ 
+        <!-- Set User Name -->
+        <property name = "hibernate.connection.username">your MySQL user name</property>
+ 
+        <!-- Set Password -->
+        <property name = "hibernate.connection.password">your MySQL password</property>
+ 
+        <!-- Set Driver Name -->
+        <property name = "hibernate.connection.driver_class">com.mysql.cj.jdbc.Driver</property>
+ 
+        <property name = "hibernate.show_sql">true</property>
+       
+        <!-- Optional: Auto-generate schema -->
+        <!-- <property name = "hibernate.hbm2ddl.auto">create</property> -->
+ 
+    </session-factory>
+</hibernate-configuration>
+Step 5: Create a class named App and inside the class write the main() method
+
+Example:
+
+// Java Program to Illustrate App File
+ 
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.cfg.Configuration;
+ 
+// Main class
+public class App {
+ 
+    // Main driver method
+    public static void main(String[] args)
+    {
+ 
+        // Create Configuration
+        Configuration configuration = new Configuration();
+        configuration.configure("hibernate.cfg.xml");
+        configuration.addAnnotatedClass(Song.class);
+ 
+        // Create Session Factory and auto-close with try-with-resources.
+        try (SessionFactory sessionFactory
+                = configuration.buildSessionFactory()) {
+ 
+            // Initialize Session Object
+            Session session = sessionFactory.openSession();
+ 
+            Song song1 = new Song();
+ 
+            song1.setId(1);
+            song1.setSongName("Broken Angel");
+            song1.setArtist("Akon");
+ 
+            session.beginTransaction();
+ 
+            // Here we have used
+            // persist() method of JPA
+            session.persist(song1);
+ 
+            session.getTransaction().commit();
+        }
+    }
+}
+Step 6: Create a schema named hibernate-demo (you can choose your own) inside your MySQL Database. And run your application.
+
+Output:
+Output in MySQL Workbench
+
+You can see the data has been saved inside your MySQL workbench. And in the hibernate-demo schema, a table named song has been created and the corresponding values for each column that you have set in App.java class have been stored.  
